@@ -59,15 +59,15 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "commented": True,
-                "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": comment_form,
+                "liked": liked
             },
         )
 
 
 class PostLike(View):
 
-    def post(self, request, slug):
+    def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
 
         if post.likes.filter(id=request.user.id).exists():
